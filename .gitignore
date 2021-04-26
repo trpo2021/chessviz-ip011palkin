@@ -1,3 +1,4 @@
-/obj/src
-
-/bin/Chess.exe
+bin/chessviz
+*.a
+*.o
+*.d
