@@ -23,4 +23,8 @@ Run:
 -include obj\src\Chess\Chess.d obj\src\Chess\ChessHelper.d
 
 clean:
-	rm -f bin\ChessDv.exe obj\src\ChessDv\ChessDvHelper.o obj\src\ChessDv\ChessDv.o
+	del obj\src\Chess\ChessHelper.o
+	del obj\src\Chess\ChessHelper.d
+	del obj\src\Chess\Chess.o
+	del obj\src\Chess\Chess.d
+	del obj\src\libChess\libChessHelper.o
