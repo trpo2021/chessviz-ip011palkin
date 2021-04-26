@@ -1,44 +1,26 @@
-APP_NAME = Chess
-LIB_NAME = libChess
-
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I src -MP -MMD
-LDFLAGS =
-LDLIBS =
 
-BIN_DIR = bin
-OBJ_DIR = obj
-SRC_DIR = src
+.PHONY:	all
 
-APP_PATH = $(BIN_DIR)/$(APP_NAME)
-LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
+all:	bin\Chess.exe Run clean
 
-SRC_EXT = c
+bin\Chess.exe:  obj\src\Chess\Chess.o obj\src\libChess\libChessHelper.a
+	g++ $(CFLAGS) -o $@ $^
 
-APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
-APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+obj\src\Chess\Chess.o: src\Chess\Chess.cpp
+	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
-LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
-
-DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d)
-
-.PHONY: all
-all: $(APP_PATH)
-
--include $(DEPS)
-
-$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
-
-$(LIB_PATH): $(LIB_OBJECTS)
+obj\src\libChess\libChessHelper.a: obj\src\Chess\ChessHelper.o
 	ar rcs $@ $^
 
-$(OBJ_DIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+obj\src\Chess\ChessHelper.o: src\libChess\ChessHelper.cpp
+	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-.PHONY: clean
+Run:
+	bin\Chess.exe
+
+-include obj\src\Chess\Chess.d obj\src\Chess\ChessHelper.d
+
 clean:
-	$(RM) $(APP_PATH) $(LIB_PATH)
-	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
-	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
+	rm -f bin\ChessDv.exe obj\src\ChessDv\ChessDvHelper.o obj\src\ChessDv\ChessDv.o
