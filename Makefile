@@ -23,8 +23,4 @@ Run:
 -include obj\src\Chess\Chess.d obj\src\Chess\ChessHelper.d
 
 clean:
-	del obj\src\Chess\ChessHelper.o
-	del obj\src\Chess\ChessHelper.d
-	del obj\src\Chess\Chess.o
-	del obj\src\Chess\Chess.d
-	del obj\src\libChess\libChessHelper.o
+	rm -f obj/src/Chess/ChessHelper.o obj/src/libChess/libChessHelper.a obj/src/Chess/Chess.o obj/src/Chess/ChessHelper.d obj/src/Chess/Chess.d
