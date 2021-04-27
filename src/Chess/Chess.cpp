@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-#include "libChess\ChessHelper.h"
+#include "libChess/ChessHelper.h"
 
 char Desk[9][9];
 
