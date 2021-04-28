@@ -1,6 +1,6 @@
-/bin/chess.exe
-/obj/src/Chess/*.o
-/obj/src/Chess/*.d
-/obj/src/libChess/*.a
+/bin/Chess.exe
+*.o
+*.d
+*.a
 
 
