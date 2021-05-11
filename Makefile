@@ -3,7 +3,7 @@ CPPFLAGS = -I src -MP -MMD
 
 .PHONY:	all
 
-all:	bin/Chess.exe Run clean
+all:	bin/Chess.exe 
 
 bin/Chess.exe:  obj/src/Chess/Chess.o obj/src/libChess/libChessHelper.a
 	g++ $(CFLAGS) -o $@ $^
